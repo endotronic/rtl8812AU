@@ -78,7 +78,7 @@ CONFIG_AP_WOWLAN = n
 ######### Notify SDIO Host Keep Power During Syspend ##########
 CONFIG_RTW_SDIO_PM_KEEP_POWER = y
 ###################### Platform Related #######################
-CONFIG_PLATFORM_I386_PC = y
+CONFIG_PLATFORM_I386_PC = n
 CONFIG_PLATFORM_ARM_RPI = n
 CONFIG_PLATFORM_ARM64 = n
 CONFIG_PLATFORM_ANDROID_X86 = n
@@ -120,7 +120,7 @@ CONFIG_PLATFORM_ARM_SUN8I_W5P1 = n
 CONFIG_PLATFORM_ACTIONS_ATM702X = n
 CONFIG_PLATFORM_ACTIONS_ATV5201 = n
 CONFIG_PLATFORM_ACTIONS_ATM705X = n
-CONFIG_PLATFORM_ARM_SUN50IW1P1 = n
+CONFIG_PLATFORM_ARM_SUN50IW1P1 = y
 CONFIG_PLATFORM_ARM_RTD299X = n
 CONFIG_PLATFORM_ARM_SPREADTRUM_6820 = n
 CONFIG_PLATFORM_ARM_SPREADTRUM_8810 = n
@@ -987,9 +987,15 @@ _PLATFORM_FILES += platform/platform_ARM_SUN50IW1P1_sdio.o
 endif
 
 ARCH := arm64
+
+# No cross-compilation because we expect to build this on Pine64
+CROSS_COMPILE ?=
+KVER  := $(shell uname -r)
+KSRC := /lib/modules/$(KVER)/build
+
 # ===Cross compile setting for Android 5.1(64) SDK ===
-CROSS_COMPILE := /home/android_sdk/Allwinner/a64/android-51/lichee/out/sun50iw1p1/android/common/buildroot/external-toolchain/bin/aarch64-linux-gnueabihf-
-KSRC :=/home/android_sdk/Allwinner/a64/android-51/lichee/linux-3.10/
+#CROSS_COMPILE := /home/android_sdk/Allwinner/a64/android-51/lichee/out/sun50iw1p1/android/common/buildroot/external-toolchain/bin/aarch64-linux-gnueabihf-
+#KSRC :=/home/android_sdk/Allwinner/a64/android-51/lichee/linux-3.10/
 endif
 
 ifeq ($(CONFIG_PLATFORM_TI_AM3517), y)
