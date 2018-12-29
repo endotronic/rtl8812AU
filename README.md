@@ -15,6 +15,15 @@ The driver (versions) are primarily targetted at [Debian](https://www.debian.org
 
 I have currently successfully compiled the driver on Debian kernel 3.2, 3.16, 4.1-4.15 and on Raspbian with kernel 3.18, 4.1 and 4.4.
 
+## Pine64
+Some hacks:
+```
+ln -s /usr/src/$(uname -r)/include/linux/sys_config.h platform/mach
+make
+sudo make install MODDESTDIR=/lib/modules/$(uname -r)/kernel/drivers/net/wireless/
+sudo modprobe -a 8812au
+```
+
 ## Raspberry Pi
 There is a section added for compilation on the Raspberry Pi, but it is not enabled by default.  
 To enable it, make the following change in the `Makefile`:
